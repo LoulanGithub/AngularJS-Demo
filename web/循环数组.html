@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="AngularJS/angular.min.js"></script>
+
+	<script type="text/javascript">
+        <!--定义一个叫myApp的模块-->
+        var app = angular.module('myApp',[]);
+        //定义一个控制器
+        app.controller('myController',function ($scope) {
+            $scope.list = [
+                {name:'张三',shuxue:100,yuwen:93},
+                {name:'李四',shuxue:88,yuwen:87},
+                {name:'王五',shuxue:77,yuwen:56}
+            ];
+        });
+	</script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+	<table>
+		<tr>
+			<td>姓名</td>
+			<td>数学成绩</td>
+			<td>语文成绩</td>
+		</tr>
+		<tr ng-repeat="code in list">
+			<td>{{code.name}}</td>
+			<td>{{code.shuxue}}</td>
+			<td>{{code.yuwen}}</td>
+		</tr>
+	</table>
+</body>
+</html>
