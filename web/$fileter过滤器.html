@@ -6,9 +6,13 @@
 	<script type="text/javascript" src="AngularJS/angular.min.js"></script>
 
 	<script type="text/javascript">
+
 		var app = angular.module('myApp',[]);
 
+
+
 		app.controller('myController',function ($scope, $filter) {
+		    $scope.list=['asdf','rewt','asdzc','kdiej','kcldoe','peoricmv'];
             $scope.filterTestUp = function () {
                 var up = $filter('uppercase')($scope.pin);
                 return up;
@@ -18,18 +22,47 @@
                 return down;
             }
         });
+
+		//自定义过滤器
+        app.filter('oneUppercase', function() {
+            return function(input) {
+                if (input) {
+                    return input[0].toUpperCase() + input.slice(1);
+                }
+            }});
 	</script>
 </head>
-<body ng-app="myApp" ng-controller="myController">
+<body ng-app="myApp" ng-controller="myController" ng-init="pin='asRAE12j89hkSFDGs'">
 	请输入字母：<input type="text" ng-model="pin">
 	<br>
+	数组：['asdf','rewt','asdzc','kdiej','kcldoe','peoricmv']
+	<br><br><br>
 	将字符转换为大写(html)：{{pin | uppercase}}
 	<br>
 	将字母转换为小写(html)：{{pin | lowercase}}
-	<br>
-	<br>
+	<br><br>
 	将字符转换为大写(javascript)：{{filterTestUp()}}
 	<br>
-	将字母转换为小写(javascript)：{{filterTestDown()}}
+	将字母转换为小写(javascript)：{{filterTestDown()}}<br>
+	<br><br>
+	包含该字符串as的元素：{{list | filter:'as'}}
+	<br>
+	不包含该字符串as的元素：{{list | filter:'!as'}}
+	<br><br>
+	截取字符串前3位：{{pin | limitTo:4}}
+	<br>
+	截取字符串后3位：{{pin | limitTo:-3}}
+	<br>
+	截取字符串第6位(从0开始数)：{{pin | limitTo:1:6}}
+	<br><br>
+	判断数字（不是全是数字不显示,默认保留到小数点后3位）：{{pin | number}}
+	<br>
+	保留小数点后3位：{{pin | number:4}}
+	<br><br>
+	根据字母排序(orderBy有两个参数，第一个必填+正序，-逆向（数组直接加减排序，json可以写根据哪个谓词进行排序），第二个可以不写。)：{{list | orderBy:'-'}}
+	<br>
+	根据字母排序(第二个参数和第一个参数的加减一个意思，true表示反转，false就是不管)：{{list | orderBy:'-':true}}
+	<br><br>
+	自定义首字母大写的过滤器：{{pin | lowercase | oneUppercase}}
 </body>
 </html>
