@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="myApp">
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<script type="text/javascript" src="AngularJS/angular.min.js"></script>
 	<script type="text/javascript">
 		<!--监听器的使用-->
-		function myController($scope) {
-			$scope.$watch('vals',function (newVal, oldVal, scope) {
+        var apps = angular.module('myApp',[]);
+
+        apps.controller('myController',function ($scope) {
+            $scope.$watch('vals',function (newVal, oldVal, scope) {
                 alert(newVal);
                 alert(oldVal);
                 console.info(scope);
             })
-        }
+        });
 	</script>
 </head>
 <body ng-controller="myController" ng-init="vals='23'">

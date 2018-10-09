@@ -6,22 +6,23 @@
 	<script type="text/javascript" src="AngularJS/angular.min.js"></script>
 
 	<script type="text/javascript">
-		/*我们是在全局作用域中创建的这个函数。这样做并不合适，因为会污染
-全局命名空间。更合理的方式是创建一个模块，然后在模块中创建控制器*/
-        function MyController($scope, $timeout) {
-            var updateClock = function () {
+        var apps = angular.module('myApp',[]);
+
+        apps.controller('myController',function ($scope, $timeout){
+             $scope.updateClock = function () {
                 $scope.clock = new Date();
                 $timeout(function () {
-                    updateClock();
+                    $scope.updateClock();
                 }, 1000);
             };
-
-            updateClock();
-        };
+            $scope.updateClock();
+        });
 	</script>
-
 </head>
-<body ng-app ng-controller="MyController">
-	<h3>Hello {{ clock }}!</h3>
+<body ng-app="myApp" ng-controller="myController">
+	<h3>{{clock | date:'yyyy-MM-dd  hh-mm-ss-sss'}}</h3>
 </body>
+<!--<body ng-app="myApp" ng-controller="myController">
+	<h3>{{clock}}</h3>
+</body>-->
 </html>

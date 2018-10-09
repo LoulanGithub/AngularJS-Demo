@@ -4,21 +4,23 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<script type="text/javascript" src="AngularJS/angular.min.js"></script>
-	<script type="text/javascript">
-		function myController($scope, $filter) {
-			$scope.filterTestUp = function () {
-				var up = $filter('uppercase')($scope.pin);
-				return up;
-            }
-			$scope.filterTestDown = function () {
-				var down = $filter('lowercase')($scope.pin);
-				return down;
-            }
-        }
-	</script>
 
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+
+		app.controller('myController',function ($scope, $filter) {
+            $scope.filterTestUp = function () {
+                var up = $filter('uppercase')($scope.pin);
+                return up;
+            }
+            $scope.filterTestDown = function () {
+                var down = $filter('lowercase')($scope.pin);
+                return down;
+            }
+        });
+	</script>
 </head>
-<body ng-app ng-controller="myController">
+<body ng-app="myApp" ng-controller="myController">
 	请输入字母：<input type="text" ng-model="pin">
 	<br>
 	将字符转换为大写(html)：{{pin | uppercase}}
