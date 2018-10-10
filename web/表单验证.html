@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="AngularJS/angular.min.js"></script>
+	<script>
+        var app = angular.module('myApp',[]);
+
+        app.controller('myController',function ($scope) {
+
+        });
+
+        $(function () {
+			$("#form").
+        });
+	</script>
+</head>
+<body ng-app="myApp" ng-controller="myController" ng-init="email='asdfasd@qq.com'">
+	<form id="form" action="#">
+		必填项验证：<input type="text" required><br>
+		email验证：<input type="email" ng-model="email" name="email" placeholder="please input address"><br>
+		最小长度验证：<input type="text" ng-minlength="5" name="username"><br>
+		最大长度验证：<input type="text" ng-maxlength="7" name="password"><br>
+		模式匹配：<input type="text" ng-pattern="[a-zA-Z]" name="sss"><br>
+		匹配数字：<input type="number" name="age" ng-model="number" /><br>
+		url验证：<input type="url" name="homepage" ng-model="user.facebook_url" />
+	</form>
+</body>
+</html>
