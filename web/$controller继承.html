@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="AngularJS/angular.min.js"></script>
+	<script>
+        var app2 = angular.module ("loulan2",[]);
+        //模块loulan2下的孙子控制器
+        app2.controller("sonSonController",function ($scope) {
+            $scope.name = "孙子";
+            $scope.age = "5";
+
+            $scope.eat = function () {
+                return "吃馍";
+            }
+        });
+
+		//要想使用模块2的控制器，那么首先要继承模块2
+		var app1 = angular.module ("loulan1",['loulan2']);
+		//loulan1下的父类控制器
+		app1.controller("parentController",function ($scope) {
+            $scope.name = "父亲";
+            $scope.age = 60;
+        });
+		//loulan1下的子类控制器
+		app1.controller("sonConntroller",function ($scope) {
+			$scope.name = "儿子";
+        });
+		//loulan1下的孙子的子类类控制器
+		app1.controller("sonSonSonController",function ($scope,$controller) {
+			$controller("sonSonController",{$scope:$scope});
+        });
+
+	</script>
+</head>
+<body ng-app="loulan1">
+	<!--第一种方式嵌套继承-->
+	<div ng-controller="parentController">
+		我是：{{name}} <br><br><br>
+		<div ng-controller="sonConntroller">
+			我是：{{name}} <br>
+			年龄：{{age}} <br><br><br><br>
+		</div>
+	</div>
+	<!--第二种方式 通过$controller-->
+	<div ng-controller="sonSonSonController">
+		我是：{{name}} <br>
+		年龄：{{age}} <br>
+		我正在：{{eat()}}
+	</div>
+</body>
+</html>
